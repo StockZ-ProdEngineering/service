@@ -1,19 +1,20 @@
 package ro.unibuc.hello.dto;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class GreetingTest {
 
-    Greeting myGreeting = new Greeting(1, "John");
+    Greeting greeting = new Greeting(12312312L,"Hello");
 
     @Test
-    void test_content(){
-        Assertions.assertSame("John", myGreeting.getContent());
-    }
-    @Test
-    void test_id(){
-        Assertions.assertEquals(1, myGreeting.getId());
+    void getId() {
+        assertEquals(12312312L,greeting.getId());
     }
 
+    @Test
+    void getContent() {
+        assertSame("Hello", greeting.getContent());
+    }
 }
