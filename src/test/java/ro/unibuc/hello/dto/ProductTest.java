@@ -3,6 +3,8 @@ package ro.unibuc.hello.dto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ProductTest {
@@ -45,12 +47,12 @@ class ProductTest {
 
     @Test
     void getRetailPrice() {
-        Assertions.assertEquals(350, product.getRetailPrice());
+        Assertions.assertEquals(Optional.of(350).get(), Optional.ofNullable(product.getRetailPrice()).get());
     }
 
     @Test
     void setRetailPrice() {
         product.setRetailPrice(250);
-        Assertions.assertEquals(250,product.getRetailPrice());
+        Assertions.assertEquals(Optional.of(250).get(), Optional.ofNullable(product.getRetailPrice()).get());
     }
 }

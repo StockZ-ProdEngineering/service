@@ -2,6 +2,8 @@ package ro.unibuc.hello.dto;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ListingTest {
@@ -44,7 +46,7 @@ class ListingTest {
     @Test
     void getStartingPrice() {
 
-        assertEquals(650,listing.getStartingPrice());
+        assertEquals(Optional.of(650).get(), Optional.ofNullable(listing.getStartingPrice()).get());
 
     }
 
@@ -53,7 +55,7 @@ class ListingTest {
 
         listing.setStartingPrice(700);
 
-        assertEquals(700,listing.getStartingPrice());
+        assertEquals(Optional.of(700).get(), Optional.ofNullable(listing.getStartingPrice()).get());
     }
 
     @Test
@@ -72,7 +74,7 @@ class ListingTest {
 
     @Test
     void getCurrentPrice() {
-        assertEquals(650, listing.getCurrentPrice());
+        assertEquals(Optional.of(650).get(), Optional.ofNullable(listing.getCurrentPrice()).get());
     }
 
     @Test
@@ -80,6 +82,6 @@ class ListingTest {
 
         listing.setCurrentPrice(700);
 
-        assertEquals(700,listing.getCurrentPrice());
+        assertEquals(Optional.of(700).get(), Optional.ofNullable(listing.getCurrentPrice()).get());
     }
 }
