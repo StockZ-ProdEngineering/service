@@ -14,8 +14,8 @@ pipeline {
 }
 
 stage('Tag image') {
-    steps{
-        script{
+    steps {
+        script {
             GIT_TAG = sh([script: 'git fetch --tag && git tag', returnStdout: true]).trim()
             MAJOR_VERSION = sh([script: 'git tag | cut -d . -f 1', returnStdout: true]).trim()
             MINOR_VERSION = sh([script: 'git tag | cut -d . -f 2', returnStdout: true]).trim()
