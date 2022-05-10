@@ -6,7 +6,7 @@ pipeline {
     MINOR_VERSION = sh([script: 'git tag | sort --version-sort | cut -d . -f 2', returnStdout: true]).trim()
     PATCH_VERSION = sh([script: 'git tag | sort --version-sort | cut -d . -f 3', returnStdout: true]).trim()
     IMAGE_TAG = "${env.MAJOR_VERSION}.\$((${env.MINOR_VERSION} + 1)).${env.PATCH_VERSION}"
-    DOCKER_PASSWORD = credentials('Docker123')
+    //DOCKER_PASSWORD = credentials('Docker123')
     }
 
     stages {
