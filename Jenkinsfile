@@ -17,8 +17,9 @@ pipeline {
         }
         stage('Tag image') {
             steps {
+                sh "docker build -t sorinnsg/hello-img:v1.1.0 ."
+                //sh "docker build -t sorinnsg/hello-img:${MAJOR_VERSION}.\$((${MINOR_VERSION} +1)).${PATCH_VERSION} ."
 
-                sh "docker build -t sorinnsg/hello-img:${MAJOR_VERSION}.\$((${MINOR_VERSION} +1)).${PATCH_VERSION} ."
 
                 withCredentials([string(credentialsId: 'Docker123', variable: 'DOCKER_PASSWORD')]) {
                 sh '''
