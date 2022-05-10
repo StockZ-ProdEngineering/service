@@ -19,6 +19,7 @@ pipeline {
                     env.PATCH_VERSION = sh([script: 'git tag | sort --version-sort | cut -d . -f 3', returnStdout: true]).trim()
                     env.IMAGE_TAG = "${env.MAJOR_VERSION}.\$((${env.MINOR_VERSION} + 1)).${env.PATCH_VERSION}"
                     env.DOCKER_PASSWORD = credentials("Docker123")
+
                     env.GITHUB_TOKEN = credentials("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")
                 }
 
