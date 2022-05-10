@@ -17,14 +17,14 @@ pipeline {
         }
         stage('Tag image') {
             steps {
-                sh "docker build -t sorinnsg/hello-img:v1.1.0 ."
+                sh "docker build -t sorinnsg/hello-img:v1.1.1 ."
                 //sh "docker build -t sorinnsg/hello-img:${MAJOR_VERSION}.\$((${MINOR_VERSION} +1)).${PATCH_VERSION} ."
 
 
                 withCredentials([string(credentialsId: 'docker_password', variable: 'DOCKER_PASSWORD')]) {
                 sh '''
                 docker login docker.io -u sorinnsg -p ${env.DOCKER_PASSWORD}
-                docker push sorinnsg/hello-img:${MAJOR_VERSION}.\$((${MINOR_VERSION} +1)).${PATCH_VERSION}
+                docker push sorinnsg/hello-img:v1.1.1
                 '''
                 }
 //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
