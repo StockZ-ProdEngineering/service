@@ -28,15 +28,15 @@ pipeline {
                 '''
                 }
 //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
-                sh "git tag ${env.IMAGE_TAG}"
+                sh "git tag v1.1.1" //image tag
                 withCredentials([string(credentialsId: 'github_token', variable: 'GITHUB_TOKEN')]){
-                sh "git push https://$GITHUB_TOKEN@github.com/StockZ-ProdEngineering/service.git ${env.IMAGE_TAG}"
+                sh "git push https://$GITHUB_TOKEN@github.com/StockZ-ProdEngineering/service.git v1.1.1" // img tag
                 }
             }
         }
         stage('Deploy'){
             steps{
-                sh "IMAGE_TAG=${env.IMAGE_TAG} docker-compose up -d hello"
+                sh "IMAGE_TAG=v1.1.1 docker-compose up -d hello" // img tag
             }
         }
     }
