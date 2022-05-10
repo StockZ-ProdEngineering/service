@@ -23,7 +23,7 @@ pipeline {
 
                 withCredentials([string(credentialsId: 'docker_password', variable: 'DOCKER_PASSWORD')]) {
                 sh '''
-                docker login docker.io -u sorinnsg -p ${env.DOCKER_PASSWORD}
+                docker login docker.io -u sorinnsg -p $DOCKER_PASSWORD
                 docker push sorinnsg/hello-img:v1.1.1
                 '''
                 }
