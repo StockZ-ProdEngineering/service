@@ -16,6 +16,7 @@ import ro.unibuc.hello.dto.Product;
 import ro.unibuc.hello.dto.User;
 
 import java.util.Optional;
+import java.lang.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
