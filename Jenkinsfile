@@ -6,7 +6,6 @@ pipeline {
     MINOR_VERSION = sh([script: 'git tag | sort --version-sort | cut -d . -f 2', returnStdout: true]).trim()
     PATCH_VERSION = sh([script: 'git tag | sort --version-sort | cut -d . -f 3', returnStdout: true]).trim()
     IMAGE_TAG = "${env.MAJOR_VERSION}.\$((${env.MINOR_VERSION} + 1)).${env.PATCH_VERSION}"
-    GITHUB_TOKEN = credentials("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")
     }
 
     stages {
@@ -25,7 +24,9 @@ pipeline {
                                 '''
                 }
                 sh "git tag ${env.IMAGE_TAG}"
-                sh "git push https://$env.GITHUB_TOKEN@github.com/StockZ-ProdEngineering/service.git ${env.IMAGE_TAG}"
+                withCredentials([string(credentialsId: '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', variable: 'GITHUB_TOKEN')]){
+                sh "git push https://$GITHUB_TOKEN@github.com/StockZ-ProdEngineering/service.git ${env.IMAGE_TAG}"
+                }
             }
         }
         stage('Deploy'){
