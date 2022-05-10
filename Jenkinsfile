@@ -30,7 +30,7 @@ pipeline {
 //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
                 sh "git tag ${env.IMAGE_TAG}"
                 withCredentials([string(credentialsId: 'github_token', variable: 'GITHUB_TOKEN')]){
-                sh "git push https://${GITHUB_TOKEN}@github.com/StockZ-ProdEngineering/service.git ${env.IMAGE_TAG}"
+                sh "git push https://$GITHUB_TOKEN@github.com/StockZ-ProdEngineering/service.git ${env.IMAGE_TAG}"
                 }
             }
         }
