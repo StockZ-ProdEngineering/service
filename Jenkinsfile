@@ -25,7 +25,7 @@ pipeline {
                                 '''
                 }
                 sh "git tag ${env.IMAGE_TAG}"
-                sh "git push https://$GITHUB_TOKEN@github.com/StockZ-ProdEngineering/service"
+                sh "git push https://$env.GITHUB_TOKEN@github.com/StockZ-ProdEngineering/service.git ${env.IMAGE_TAG}"
             }
         }
         stage('Deploy'){
