@@ -21,16 +21,16 @@ pipeline {
                 //sh "docker build -t sorinnsg/hello-img:${MAJOR_VERSION}.\$((${MINOR_VERSION} +1)).${PATCH_VERSION} ."
 
 
-                withCredentials([string(credentialsId: 'Docker123', variable: 'DOCKER_PASSWORD')]) {
+                withCredentials([string(credentialsId: 'docker_password', variable: 'DOCKER_PASSWORD')]) {
                 sh '''
                 set +x
                 docker login docker.io -u sorinnsg -p ${env.DOCKER_PASSWORD}
                 docker push sorinnsg/hello-img:${MAJOR_VERSION}.\$((${MINOR_VERSION} +1)).${PATCH_VERSION}
                 '''
                 }
-
+//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
                 sh "git tag ${env.IMAGE_TAG}"
-                withCredentials([string(credentialsId: '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', variable: 'GITHUB_TOKEN')]){
+                withCredentials([string(credentialsId: 'github_token', variable: 'GITHUB_TOKEN')]){
                 sh "git push https://${GITHUB_TOKEN}@github.com/StockZ-ProdEngineering/service.git ${env.IMAGE_TAG}"
                 }
             }
