@@ -17,26 +17,26 @@ pipeline {
         }
         stage('Tag image') {
             steps {
-                //sh "docker build -t sorinnsg/hello-img:v1.1.1 ."
-                sh "docker build -t sorinnsg/hello-img:${MAJOR_VERSION}.\$((${MINOR_VERSION} +1)).${PATCH_VERSION} ."
+                sh "docker build -t sorinnsg/hello-img:v1.1.2 ."
+                //sh "docker build -t sorinnsg/hello-img:${MAJOR_VERSION}.\$((${MINOR_VERSION} +1)).${PATCH_VERSION} ."
 
 
                 withCredentials([string(credentialsId: 'docker_password', variable: 'DOCKER_PASSWORD')]) {
                 sh '''
                 docker login docker.io -u sorinnsg -p $DOCKER_PASSWORD
-                docker push sorinnsg/hello-img:${MAJOR_VERSION}.\$((${MINOR_VERSION} +1)).${PATCH_VERSION}
+                docker push sorinnsg/hello-img:v1.1.2
                 '''
                 }
 //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
-                sh "git tag ${IMAGE_TAG}" //image tag
+                sh "git tag v1.1.2" //image tag
                 withCredentials([string(credentialsId: 'github_token', variable: 'GITHUB_TOKEN')]){
-                sh "git push https://$GITHUB_TOKEN@github.com/StockZ-ProdEngineering/service.git ${IMAGE_TAG}" // img tag
+                sh "git push https://$GITHUB_TOKEN@github.com/StockZ-ProdEngineering/service.git v1.1.2" // img tag
                 }
             }
         }
         stage('Deploy'){
             steps{
-                sh "IMAGE_TAG=${IMAGE_TAG} docker-compose up -d hello" // img tag
+                sh "IMAGE_TAG=v1.1.2 docker-compose up -d hello" // img tag
             }
         }
     }
