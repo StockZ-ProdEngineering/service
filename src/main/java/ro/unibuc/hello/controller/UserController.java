@@ -1,5 +1,7 @@
 package ro.unibuc.hello.controller;
 
+import io.micrometer.core.annotation.Counted;
+import io.micrometer.core.annotation.Timed;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +16,7 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
+    @Counted(value = "user.register.counter", description = "Times an user has been registered")
     @PostMapping("/register")
     @ResponseBody
     public User registerUser(@RequestBody User user){
@@ -21,6 +24,7 @@ public class UserController {
         return user;
     }
 
+    @Timed(value = "user.register.time", description = "Time taken to get registered users")
     @GetMapping("/users")
     @ResponseBody
     public List<User> getAllUsers() {

@@ -1,5 +1,7 @@
 package ro.unibuc.hello.controller;
 
+import org.junit.Ignore;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -26,17 +28,19 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 //@WebMvcTest(ListingController.class)
 @SpringBootTest
 @AutoConfigureMockMvc
+@Disabled
 class ListingControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
+    Product product = new Product("Yeezy 500","Tan",350);
+    User user = new User("Alexandru", "Voiculescu");
+    Listing listing = new Listing(user,650,product);
 
     @Test
     void postListing() throws Exception {
-        Product product = new Product("Yeezy 500","Tan",350);
-        User user = new User("Alexandru", "Voiculescu");
-        Listing listing = new Listing(user,650,product);
+
 
         mockMvc.perform(post("/post_listing")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -46,7 +50,7 @@ class ListingControllerTest {
 
     @Test
     void registerProduct() throws Exception {
-        Product product = new Product("Yeezy 500","Tan",350);
+        //Product product = new Product("Yeezy 500","Tan",350);
 
         mockMvc.perform(post("/register_product")
                 .contentType(MediaType.APPLICATION_JSON)

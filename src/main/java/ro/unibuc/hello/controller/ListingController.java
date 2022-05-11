@@ -1,5 +1,7 @@
 package ro.unibuc.hello.controller;
 
+import io.micrometer.core.annotation.Counted;
+import io.micrometer.core.annotation.Timed;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +23,7 @@ public class ListingController {
     @Autowired
     private ProductRepository productRepository;
 
+    @Timed(value = "post.listing.time", description = "Time taken to post a listing")
     @PostMapping("/post_listing")
     @ResponseBody
     public Listing postListing(@RequestBody Listing listing){
@@ -39,6 +42,8 @@ public class ListingController {
         return listing;
     }
 
+    @Timed(value = "product.register.time", description = "Time taken to register product")
+    @Counted(value = "produnct.register.counter", description = "Times a product has been registered")
     @PostMapping("/register_product")
     @ResponseBody
     public Product registerProduct(@RequestBody Product product){
@@ -46,10 +51,12 @@ public class ListingController {
         return product;
     }
 
+    @Timed(value = "product.return.time", description = "Time taken to return products")
     @GetMapping("/products")
     @ResponseBody
     public List<Product> getAllProducts(){return productRepository.findAll();}
 
+    @Timed(value = "listing.return.time", description = "Time taken to return listings")
     @GetMapping("/listings")
     @ResponseBody
     public List<Listing> getAllListings(){
